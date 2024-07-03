@@ -1,0 +1,10 @@
+services:
+  server:
+    image: node
+    ports:
+      - 3000:3000
+    volumes:
+      - ./code/server:/app
+    working_dir: /app
+    # c'est une bidouille pour garder le conteneur ouver, vu qu'ont lui a dit qu'ont va utiliser le terminale
+    tty: true
