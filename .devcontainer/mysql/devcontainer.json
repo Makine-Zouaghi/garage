@@ -1,0 +1,6 @@
+{
+    "name": "Garage - MySQLServer",
+    "service": "mysql",
+    "dockerComposeFile": "../../docker-compose.dev.yaml",
+    "workspaceFolder": "/app"
+}
