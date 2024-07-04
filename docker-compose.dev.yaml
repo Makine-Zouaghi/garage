@@ -1,6 +1,6 @@
 services:
   server:
-    image: node
+    image: node:22
     ports:
       - 3000:3000
     volumes:
@@ -8,3 +8,15 @@ services:
     working_dir: /app
     # c'est une bidouille pour garder le conteneur ouver, vu qu'ont lui a dit qu'ont va utiliser le terminale
     tty: true
+  # service gérant le serveur MySQL
+  mysql:
+    image: mysql:9
+    ports:
+      - 3306:3306
+    volumes:
+      - ./code/server/mysql:/app
+      - ./mysql-db
+    working_dir: /app
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: root

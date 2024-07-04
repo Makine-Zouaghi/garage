@@ -1,5 +1,7 @@
 import express, { type Router, type Express, type Request, type Response } from "express";
 import http from "node:http";
+import HomepageRouter from "../router/home page_router.js";
+import NotFoundRouter from "../router/not_found_router.js";
 
 
 class Server{
@@ -9,16 +11,23 @@ class Server{
 
     // constructeur
     constructor(){
+        // lier le routeur
         this.app.use(this.router)
 
-        this.getRoutes();
+        this.listRouters();
     }
 
     // méthodes
-    private getRoutes = (): void => {
-        this.router.get('/', (req: Request, res: Response) => {
-            res.send('homepage');
-        });
+    private listRouters = (): void => {
+        /*
+        appel d'un routeur :
+            -préfixe de toutes les routes contenurs dans le routeur
+            -routeur
+        */ 
+        this.router.use('/', new HomepageRouter().getRouter());
+
+        // le routeur Not Found doit etre obligatoirmet appelé en dernière position
+        this.router.use('*', new NotFoundRouter().getRouter()); 
     };
 
     public createServer = ():http.Server => {
