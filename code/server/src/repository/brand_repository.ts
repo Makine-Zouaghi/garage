@@ -1,5 +1,6 @@
 import { FieldPacket, Pool, QueryResult } from "mysql2/promise";
 import MysqlService from "../service/mysql_service.js";
+import Brand from "../models/brand.js";
 
 class BrandRepository {
     // accéder au service MySQL
@@ -9,7 +10,7 @@ class BrandRepository {
     private table = 'brand';
 
     // selection de tous les enregistrements
-    public selectAll = async () => {
+    public selectAll = async (): Promise<QueryResult | unknown | Brand[]> => {
         /* connexion à la basse de données
             await permet de créer un temps d'attente
                 obligatoirement utilisé dans une fonction asynchrone
@@ -35,7 +36,7 @@ class BrandRepository {
 
 
     //data represente le req.params envoyé par le controller
-    public selectOne = async (data: object) => {
+    public selectOne = async (data: object): Promise<QueryResult | unknown | Brand > => {
         const connection: Pool = await this.mySQLService.connect();
 
         //creation d'une variable de requete, eviter les injection sql
@@ -49,7 +50,9 @@ class BrandRepository {
             const results: [QueryResult, FieldPacket[]] = await
                 connection.execute(query, data);
 
-            return results.shift();
+            
+
+            return (results.shift() as []).shift();
             } catch (error) {
             return error;
         }

@@ -1,9 +1,10 @@
 import MysqlService from "../service/mysql_service.js";
-class BrandRepository {
+import BrandRepository from "./brand_repository.js";
+class VehiculeRepository {
     // accéder au service MySQL
     mySQLService = new MysqlService();
     // table principale itilisée par la classe
-    table = 'brand';
+    table = 'vehicule';
     // selection de tous les enregistrements
     selectAll = async () => {
         /* connexion à la basse de données
@@ -16,8 +17,19 @@ class BrandRepository {
         // exécuter la requête SQL ou récupérer une erreur
         try {
             const results = await connection.execute(query);
+            const fullResults = results.shift();
+            //boucler sur les resultats
+            for (let i = 0; i < fullResults.length; i++) {
+                // recuperer un objet Brand
+                const brand = await new BrandRepository().selectOne({
+                    id: fullResults[i].brand_id,
+                });
+                // assigner le resultat de la requete a une proprieté
+                fullResults[i].brand = brand;
+            }
             // renvoyer les résultats de la requête
-            return results.shift();
+            return fullResults;
+            // return results.shift();
         }
         catch (error) {
             return error;
@@ -34,11 +46,16 @@ class BrandRepository {
                     `;
         try {
             const results = await connection.execute(query, data);
-            return results.shift().shift();
+            const fullResults = results.shift().shift();
+            const brand = await new BrandRepository().selectOne({
+                id: fullResults.brand_id,
+            });
+            fullResults.brand = brand;
+            return fullResults;
         }
         catch (error) {
             return error;
         }
     };
 }
-export default BrandRepository;
+export default VehiculeRepository;

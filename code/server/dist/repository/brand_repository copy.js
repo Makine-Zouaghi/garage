@@ -34,7 +34,7 @@ class BrandRepository {
                     `;
         try {
             const results = await connection.execute(query, data);
-            return results.shift().shift();
+            return results.shift();
         }
         catch (error) {
             return error;

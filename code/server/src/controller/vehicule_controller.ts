@@ -1,13 +1,14 @@
 import type { Request, Response } from "express";
-import BrandRepository from "../repository/brand_repository.js";
+import VehiculeRepository from "../repository/vehicule_repository.js";
 
-class BrandController {
-    private brandRepository: BrandRepository = new BrandRepository;
+
+class VehiculeController {
+    private vehiculeRepository: VehiculeRepository = new VehiculeRepository;
 
     // méthodes appellées par le routeur
     public index = async (req: Request, res: Response):
         Promise<Response> => {
-        const results = await this.brandRepository.selectAll();
+        const results = await this.vehiculeRepository.selectAll();
 
 
         //si une erreur est renvoyé
@@ -36,7 +37,7 @@ class BrandController {
         console.log(req.params);
 
 
-        const results = await this.brandRepository.selectOne(req.params);
+        const results = await this.vehiculeRepository.selectOne(req.params);
 
 
         //si une erreur est renvoyé
@@ -61,4 +62,4 @@ class BrandController {
 
 
 
-export default BrandController;
+export default VehiculeController;
