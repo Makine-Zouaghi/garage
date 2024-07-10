@@ -15,17 +15,17 @@ CREATE TABLE garage.vehicule(
     FOREIGN KEY(brand_id) REFERENCES garage.brand(id)
 );
 
-CREATE TABLE garage.option(
+CREATE TABLE garage.options(
     id TINYINT UNSIGNED PRIMARY KEY AUTO_INCREMENT,
     name VARCHAR(50) NOT NULL UNIQUE
 );
 
-CREATE TABLE garage.vehicule_option(
+CREATE TABLE garage.vehicule_options(
     vehicule_id TINYINT UNSIGNED,
-    option_id TINYINT UNSIGNED,
+    options_id TINYINT UNSIGNED,
     FOREIGN KEY(vehicule_id) REFERENCES garage.vehicule(id),
-    FOREIGN KEY(option_id) REFERENCES garage.option(id),
-    PRIMARY KEY(vehicule_id, option_id) 
+    FOREIGN KEY(options_id) REFERENCES garage.options(id),
+    PRIMARY KEY(vehicule_id, options_id) 
 );
 
 INSERT INTO garage.brand
@@ -48,14 +48,14 @@ VALUES
     (NULL, '2008', 8000, 4)
 ;
 
-INSERT INTO garage.option
+INSERT INTO garage.options
 VALUES
     (NULL, 'Climatisation'),
     (NULL, 'Caméra de recul'),
     (NULL, 'Park assist')
 ;
 
-INSERT INTO garage.vehicule_option
+INSERT INTO garage.vehicule_options
 VALUES
     (1,1),
     (1,2),

@@ -1,9 +1,9 @@
 import MysqlService from "../service/mysql_service.js";
-class BrandRepository {
+class OptionRepository {
     // accéder au service MySQL
     mySQLService = new MysqlService();
     // table principale itilisée par la classe
-    table = 'brand';
+    table = 'options';
     // selection de tous les enregistrements
     selectAll = async () => {
         /* connexion à la basse de données
@@ -40,5 +40,22 @@ class BrandRepository {
             return error;
         }
     };
+    // permet de selectioner dans une liste
+    selectInList = async (data) => {
+        const connection = await this.mySQLService.connect();
+        //creation d'une variable de requete, eviter les injection sql
+        const query = `SELECT ${this.table}.* 
+                        FROM ${process.env.MYSQL_DB}.${this.table}
+                        WHERE ${this.table}.id IN (${data})
+                        ;
+                    `;
+        try {
+            const results = await connection.execute(query, data);
+            return results.shift().shift();
+        }
+        catch (error) {
+            return error;
+        }
+    };
 }
-export default BrandRepository;
+export default OptionRepository;

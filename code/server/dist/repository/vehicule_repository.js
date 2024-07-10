@@ -1,5 +1,6 @@
 import MysqlService from "../service/mysql_service.js";
 import BrandRepository from "./brand_repository.js";
+import OptionRepository from "./option_repository.js";
 class VehiculeRepository {
     // accéder au service MySQL
     mySQLService = new MysqlService();
@@ -13,7 +14,12 @@ class VehiculeRepository {
                 permet de récupérer automatiquement le contenu de la promesse
         */
         const connection = await this.mySQLService.connect();
-        const query = `SELECT ${this.table}.* FROM ${process.env.MYSQL_DB}.${this.table};`;
+        const query = `SELECT ${this.table}.*, GROUP_CONCAT(options.id) AS options_id
+            FROM ${process.env.MYSQL_DB}.${this.table} 
+            JOIN ${process.env.MYSQL_DB}.vehicule_options ON vehicule_options.vehicule_id = vehicule.id
+            JOIN ${process.env.MYSQL_DB}.options ON vehicule_options.options_id = options.id
+            GROUP BY ${this.table}.id
+            ;`;
         // exécuter la requête SQL ou récupérer une erreur
         try {
             const results = await connection.execute(query);
@@ -26,6 +32,10 @@ class VehiculeRepository {
                 });
                 // assigner le resultat de la requete a une proprieté
                 fullResults[i].brand = brand;
+                // requete pour recuperer les,options
+                const options = await new OptionRepository().selectInList(fullResults[i].options_id);
+                // assigner les resultats de ka reqete a une propriété
+                fullResults[i].options_id;
             }
             // renvoyer les résultats de la requête
             return fullResults;

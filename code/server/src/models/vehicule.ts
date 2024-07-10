@@ -1,4 +1,5 @@
 import type Brand from "./brand.js";
+import Option from "./option.js";
 
 type Vehicule = {
     // ? représente la valeur null
@@ -7,6 +8,9 @@ type Vehicule = {
     price: number;
     brand_id: number;
     brand?: Brand | unknown;
+    // liste des identifiants des options 
+    options_id?: string;
+    options?: Option[] | unknown;
 };
 
 export default Vehicule;
