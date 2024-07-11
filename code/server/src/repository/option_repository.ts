@@ -77,7 +77,7 @@ class OptionRepository {
 
             
 
-            return (results.shift() as []).shift();
+            return results.shift() as [];
             } catch (error) {
             return error;
         }

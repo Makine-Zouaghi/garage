@@ -13,6 +13,9 @@ class Server{
 
     // constructeur
     constructor(){
+        // activer le midleware JSON, permet d'accéder à la propriété body de la requete HTTP en JSON
+        this.router.use(express.json());
+
         // lier le routeur
         this.app.use(this.router)
 

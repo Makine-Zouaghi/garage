@@ -1,65 +1,82 @@
 import type { Request, Response } from "express";
 import VehiculeRepository from "../repository/vehicule_repository.js";
 
-
 class VehiculeController {
-    private vehiculeRepository: VehiculeRepository = new VehiculeRepository;
+	private vehiculeRepository: VehiculeRepository = new VehiculeRepository();
 
-    // méthodes appellées par le routeur
-    public index = async (req: Request, res: Response):
-        Promise<Response> => {
-        const results = await this.vehiculeRepository.selectAll();
+	// méthodes appellées par le routeur
+	public index = async (req: Request, res: Response): Promise<Response> => {
+		const results = await this.vehiculeRepository.selectAll();
 
+		//si une erreur est renvoyé
 
-        //si une erreur est renvoyé
+		if (results instanceof Error) {
+			//en l'environement developpement
+			return process.env.NODE_ENV === "dev"
+				? res.json(results)
+				: res.status(400).json({
+						status: 400,
+						message: "Error",
+					});
+		}
 
-        if (results instanceof Error) {
-            //en l'environement developpement
-            return process.env.NODE_ENV === 'dev' ? res.json
-                (results) : res.status(400).json({
-                    status: 400,
-                    message: 'Error',
-                });
-        }
+		return res.status(200).json({
+			status: 200,
+			message: "OK",
+			data: results,
+		});
+	};
 
-        return res.status(200).json({
-            status: 200,
-            message: 'OK',
-            data: results,
-        });
-    };
+	public one = async (req: Request, res: Response): Promise<Response> => {
+		//req.params permet de récupérer les variables de route
 
+		console.log(req.params);
 
-    public one = async (req: Request, res: Response):
-        Promise<Response> => {
-        //req.params permet de récupérer les variables de route 
+		const results = await this.vehiculeRepository.selectOne(req.params);
 
-        console.log(req.params);
+		//si une erreur est renvoyé
 
+		if (results instanceof Error) {
+			//en l'environement developpement
+			return process.env.NODE_ENV === "dev"
+				? res.json(results)
+				: res.status(400).json({
+						status: 400,
+						message: "Error",
+					});
+		}
 
-        const results = await this.vehiculeRepository.selectOne(req.params);
+		return res.status(200).json({
+			status: 200,
+			message: "OK",
+			data: results,
+		});
+	};
 
+	public create = async (req: Request, res: Response): Promise<Response> => {
+        console.log(req.body);
+        
 
-        //si une erreur est renvoyé
+		//req.body permet de récupérer les données dans la propriété body de la requete HTTP
+		const results = await this.vehiculeRepository.create(req.body);
 
-        if (results instanceof Error) {
-            //en l'environement developpement
-            return process.env.NODE_ENV == 'dev' ? res.json
-                (results) : res.status(400).json({
-                    status: 400,
-                    message: 'Error',
-                });
-        }
+		//si une erreur est renvoyé
+		if (results instanceof Error) {
+			//en l'environement developpement
+			return process.env.NODE_ENV === "dev"
+				? res.json(results)
+				: res.status(400).json({
+						status: 400,
+						message: "Error",
+					});
+		}
 
-        return res.status(200).json({
-            status: 200,
-            message: 'OK',
-            data: results,
-        });
-    };
-
+		return res.status(201).json({
+			status: 201,
+			message: "vehicule created",
+			data: results,
+		});
+	};
 }
-
-
 
 export default VehiculeController;

@@ -10,8 +10,9 @@ class VehiculeRouter {
         this.router.get("/", new VehiculeController().index);
         //route avec une v  riable de route; préceder d'un :
         this.router.get("/:id", new VehiculeController().one);
+        // route pour créer un vehicule
+        this.router.post("/", new VehiculeController().create);
         return this.router;
     };
 }
-;
 export default VehiculeRouter;
