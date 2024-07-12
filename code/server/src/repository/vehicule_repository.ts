@@ -132,15 +132,77 @@ class VehiculeRepository {
 			await connection.execute(query);
 
 			// inserer les options
-			const values = data.options_id?.split(",").map((value) => `(@vehicule_id, ${value})`).join(",");
+			const values = data.options_id
+				?.split(",")
+				.map((value) => `(@vehicule_id, ${value})`)
+				.join(",");
+
+			query = `
+				INSERT INTO ${process.env.MYSQL_DB}.vehicule_options
+				Values ${values};
+			`;
+
+			const results = await connection.execute(query);
+
+			//valider la transaction
+			await transaction.commit();
+		} catch (error) {
+			// annuler la transaction
+			transaction.rollback();
+
+			return error;
+		}
+	};
+
+	public update = async (data: Vehicule) => {
+		// connexion
+		const connection: Pool = await this.mySQLService.connect();
+
+		// canal isolé pour la transaction
+		const transaction = await connection.getConnection();
+
+		try {
+			// demarrer une transaction
+			await transaction.beginTransaction();
+
+			// première requète
+			let query = `
+                UPDATE ${process.env.MYSQL_DB}.${this.table}
+                SET
+                    ${this.table}.model = :model,
+                    ${this.table}.price = :price,
+                    ${this.table}.brand_id = :brand_id
+				WHERE 
+					${this.table}.id = :id
+
+                ;
+            `;
+
+			await connection.execute(query, data);
+
+			// suprimer les options existante du vehicule a suprimer
+			query = `
+				DELETE FROM ${process.env.MYSQL_DB}.vehicule_options
+				WHERE vehicule_options.vehicule_id = :id
+				;
+			`;
+
+			await connection.execute(query, data);
+
+
+			// executer le derneier identifiant inséré
+			// query = "SET @vehicule_id = LAST_INSERT_ID();";
+			// await connection.execute(query);
+
+			// // inserer les options
+			const values = data.options_id?.split(",").map((value) => `(:id, ${value})`).join(",");
 
 			query =`
 				INSERT INTO ${process.env.MYSQL_DB}.vehicule_options
 				Values ${values};
 			`;
-			
-			const results = await connection.execute(query);
-			
+
+			const results = await connection.execute(query, data);
 
 			//valider la transaction
 			await transaction.commit();
