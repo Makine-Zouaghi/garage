@@ -14,6 +14,7 @@ class VehiculeRouter {
         this.router.post("/", new VehiculeController().create);
         // route pour modifier un vehicule 
         this.router.put("/:id", new VehiculeController().update);
+        this.router.delete("/:id", new VehiculeController().delete);
         return this.router;
     };
 }

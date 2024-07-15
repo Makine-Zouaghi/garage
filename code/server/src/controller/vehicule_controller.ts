@@ -76,7 +76,6 @@ class VehiculeController {
 			data: results,
 		});
 	};
-
 	public update = async (req: Request, res: Response): Promise<Response> => {
 		// regrouper l'identifiant contenu dans L-URL (req.paraps) avec les données de mise a jour contenues dans la propriété body de la requete HTTP
 		const data = { ...req.body, id: req.params.id };
@@ -95,6 +94,27 @@ class VehiculeController {
 		return res.status(200).json({
 			status: 200,
 			message: "Vehicule updated",
+		});
+	};
+
+	public delete = async (req: Request, res: Response): Promise<Response> => {
+		// regrouper l'identifiant contenu dans L-URL (req.paraps) avec les données de mise a jour contenues dans la propriété body de la requete HTTP
+		const results = await this.vehiculeRepository.delete({
+			id: req.params.id as number,
+		});
+
+		if (results instanceof Error) {
+			return process.env.NODE_ENV === "dev"
+				? res.json(results)
+				: res.status(400).json({
+						status: 400,
+						message: "Error",
+					});
+		}
+
+		return res.status(200).json({
+			status: 200,
+			message: "Vehicule deleted",
 		});
 	};
 }

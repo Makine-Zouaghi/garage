@@ -156,5 +156,39 @@ class VehiculeRepository {
             return error;
         }
     };
+    delete = async (data) => {
+        // connexion
+        const connection = await this.mySQLService.connect();
+        // canal isolé pour la transaction
+        const transaction = await connection.getConnection();
+        try {
+            // démarrer une transaction
+            await transaction.beginTransaction();
+            // première requête
+            // supprimer les options existantes du véhicule à supprimer
+            let query = `
+                DELETE FROM ${process.env.MYSQL_DB}.vehicule_options
+                WHERE
+                    vehicule_options.vehicule_id = :id
+                ;
+            `;
+            await connection.execute(query, data);
+            // supprimer le véhicule
+            query = `
+				DELETE FROM ${process.env.MYSQL_DB}.${this.table}
+                WHERE ${this.table}.id = :id
+                ;
+            `;
+            const results = await connection.execute(query, data);
+            // valider la transaction
+            await transaction.commit();
+            return results;
+        }
+        catch (error) {
+            // annuler la transaction
+            await transaction.rollback();
+            return error;
+        }
+    };
 }
 export default VehiculeRepository;

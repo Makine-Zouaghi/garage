@@ -77,5 +77,23 @@ class VehiculeController {
             message: "Vehicule updated",
         });
     };
+    delete = async (req, res) => {
+        // regrouper l'identifiant contenu dans L-URL (req.paraps) avec les données de mise a jour contenues dans la propriété body de la requete HTTP
+        const results = await this.vehiculeRepository.delete({
+            id: req.params.id,
+        });
+        if (results instanceof Error) {
+            return process.env.NODE_ENV === "dev"
+                ? res.json(results)
+                : res.status(400).json({
+                    status: 400,
+                    message: "Error",
+                });
+        }
+        return res.status(200).json({
+            status: 200,
+            message: "Vehicule deleted",
+        });
+    };
 }
 export default VehiculeController;
