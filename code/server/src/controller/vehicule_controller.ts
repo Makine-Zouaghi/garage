@@ -100,7 +100,7 @@ class VehiculeController {
 	public delete = async (req: Request, res: Response): Promise<Response> => {
 		// regrouper l'identifiant contenu dans L-URL (req.paraps) avec les données de mise a jour contenues dans la propriété body de la requete HTTP
 		const results = await this.vehiculeRepository.delete({
-			id: req.params.id as number,
+			id: req.params.id as unknown as number,
 		});
 
 		if (results instanceof Error) {
@@ -117,6 +117,8 @@ class VehiculeController {
 			message: "Vehicule deleted",
 		});
 	};
+
+
 }
 
 export default VehiculeController;
