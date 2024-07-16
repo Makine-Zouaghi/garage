@@ -4,6 +4,7 @@ import HomepageRouter from "../router/home page_router.js";
 import NotFoundRouter from "../router/not_found_router.js";
 import BrandRouter from "../router/brand_router.js";
 import VehiculeRouter from "../router/vehicule_router.js";
+import SecurityRouter from "../router/security_router.js";
 class Server {
     // propriétés
     app = express();
@@ -23,11 +24,12 @@ class Server {
             -préfixe de toutes les routes contenurs dans le routeur
             -routeur
         */
-        this.router.use('/', new HomepageRouter().getRouter());
-        this.router.use('/brand', new BrandRouter().getRouter());
-        this.router.use('/vehicule', new VehiculeRouter().getRouter());
+        this.router.use("/", new HomepageRouter().getRouter());
+        this.router.use("/brand", new BrandRouter().getRouter());
+        this.router.use("/vehicule", new VehiculeRouter().getRouter());
+        this.router.use("/", new SecurityRouter().getRouter());
         // le routeur Not Found doit etre obligatoirmet appelé en dernière position
-        this.router.use('*', new NotFoundRouter().getRouter());
+        this.router.use("*", new NotFoundRouter().getRouter());
     };
     createServer = () => {
         return http.createServer(this.app);
