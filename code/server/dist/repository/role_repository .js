@@ -1,16 +1,11 @@
 import MysqlService from "../service/mysql_service.js";
-class BrandRepository {
+class RoleRepository {
     // accéder au service MySQL
     mySQLService = new MysqlService();
     // table principale itilisée par la classe
-    table = "brand";
+    table = "roles";
     // selection de tous les enregistrements
     selectAll = async () => {
-        /* connexion à la basse de données
-            await permet de créer un temps d'attente
-                obligatoirement utilisé dans une fonction asynchrone
-                permet de récupérer automatiquement le contenu de la promesse
-        */
         const connection = await this.mySQLService.connect();
         const query = `SELECT ${this.table}.* FROM ${process.env.MYSQL_DB}.${this.table};`;
         // exécuter la requête SQL ou récupérer une erreur
@@ -41,4 +36,4 @@ class BrandRepository {
         }
     };
 }
-export default BrandRepository;
+export default RoleRepository;

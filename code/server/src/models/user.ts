@@ -4,7 +4,7 @@ type User = {
 	id?: number;
 	email?: string;
 	password?: string;
-	role_id?: number;
+	roles_id?: number;
 	// unknown, si une erreur est renvoiyée
 	role?: Role | unknown;
 };

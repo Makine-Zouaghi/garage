@@ -3,7 +3,7 @@ class OptionRepository {
     // accéder au service MySQL
     mySQLService = new MysqlService();
     // table principale itilisée par la classe
-    table = 'options';
+    table = "options";
     // selection de tous les enregistrements
     selectAll = async () => {
         /* connexion à la basse de données

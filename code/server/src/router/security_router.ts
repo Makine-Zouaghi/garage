@@ -10,6 +10,8 @@ class SecurityRouter{
         une route est relier une une url est a une methode http (GET, PUT, POST, DELETE)
         */
 		this.router.post("/register", new SecurityController().register);
+
+		this.router.post("/login", new SecurityController().login);
         return this.router;     
     }
 };

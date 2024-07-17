@@ -3,7 +3,7 @@ class BrandRepository {
     // accéder au service MySQL
     mySQLService = new MysqlService();
     // table principale itilisée par la classe
-    table = 'brand';
+    table = "brand";
     // selection de tous les enregistrements
     selectAll = async () => {
         /* connexion à la basse de données
