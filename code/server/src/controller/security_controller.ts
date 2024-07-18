@@ -3,6 +3,7 @@ import SecurityRepository from "../repository/security_repository.js";
 import argon2 from "argon2";
 import type { QueryResult } from "mysql2";
 import type User from "../models/user.js";
+import jwt from "jsonwebtoken";
 
 class SecurityController {
 	private securityRepository: SecurityRepository = new SecurityRepository();
@@ -41,7 +42,7 @@ class SecurityController {
 		const user: QueryResult | unknown =
 			await this.securityRepository.getUserByEmail(req.body);
 		// console.log(user);
-		
+
 		// sin l'utilisateur n'éxiste pas
 		if (user instanceof Error) {
 			return res.status(400).json({
@@ -50,6 +51,40 @@ class SecurityController {
 			});
 		}
 
+		// verifier le mot de passe: comparer le mot de passe saisi avec le hash contenu dans la basse
+		const isPasswordValid: boolean = await argon2.verify(
+			(user as User).password as string,
+			req.body.password,
+		);
+
+		if (!isPasswordValid) {
+			return res.status(403).json({
+				status: 403,
+				message: "Forbidden",
+			});
+		}
+
+		// si l'utilisateur existe et que le mot de passe est correct
+		return res.status(200).json({
+			statut: 200,
+			message: "ok",
+			data: user,
+		});
+	};
+
+	public auth = async (req: Request, res: Response): Promise<Response> => {
+		// recuperer l'utilisateur par son mail
+		const user: QueryResult | unknown =
+			await this.securityRepository.getUserByEmail(req.body);
+		// console.log(user);
+
+		// sin l'utilisateur n'éxiste pas
+		if (user instanceof Error) {
+			return res.status(400).json({
+				status: 400,
+				message: "error, user does not exist",
+			});
+		}
 
 		// verifier le mot de passe: comparer le mot de passe saisi avec le hash contenu dans la basse
 		const isPasswordValid: boolean = await argon2.verify(
@@ -57,19 +92,32 @@ class SecurityController {
 			req.body.password,
 		);
 
-		if(!isPasswordValid) {
+		if (!isPasswordValid) {
 			return res.status(403).json({
 				status: 403,
 				message: "Forbidden",
 			});
 		}
 
+		//generer un jeton securisé (JSON Web Token)
+		// le token est valide pendant 30sec
+		const token = jwt.sign(
+			{
+				user: user,
+			},
+			process.env.SECRET as string,
+			{
+				expiresIn: 30,
+			},
+		);
 
 		// si l'utilisateur existe et que le mot de passe est correct
 		return res.status(200).json({
 			statut: 200,
 			message: "ok",
-			data: user,
+			data: {
+				token: token
+			},
 		});
 	};
 }
