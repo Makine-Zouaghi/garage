@@ -1,0 +1,6 @@
+{
+    "name": "Garage - MongoDB Server",
+    "service": "mongodb",
+    "dockerComposeFile": "../../docker-compose.dev.yaml",
+    "workspaceFolder": "/app"
+}

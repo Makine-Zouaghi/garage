@@ -1,9 +1,4 @@
-import express, {
-	type Router,
-	type Express,
-	type Request,
-	type Response,
-} from "express";
+import express, {type Router,type Express,type Request,type Response,} from "express"; 
 import http from "node:http";
 import HomepageRouter from "../router/home page_router.js";
 import NotFoundRouter from "../router/not_found_router.js";
@@ -12,6 +7,7 @@ import VehiculeRouter from "../router/vehicule_router.js";
 import SecurityRouter from "../router/security_router.js";
 import cors from "cors";
 import OriginMiddleware from "../middleware/security/originMiddleware.js";
+import ContactRouter from "../router/contact_router.js";
 
 class Server {
 	// propriétés
@@ -50,6 +46,7 @@ class Server {
 		this.router.use("/brand", new BrandRouter().getRouter());
 		this.router.use("/vehicule", new VehiculeRouter().getRouter());
 		this.router.use("/", new SecurityRouter().getRouter());
+		this.router.use("/contact", new ContactRouter().getRouter());
 
 		// le routeur Not Found doit etre obligatoirmet appelé en dernière position
 		this.router.use("*", new NotFoundRouter().getRouter());

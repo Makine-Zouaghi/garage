@@ -20,3 +20,16 @@ services:
     restart: always
     environment:
       MYSQL_ROOT_PASSWORD: root
+  # le service gérant le serveur MongoDB
+  mongodb: 
+    image: mongo
+    ports:
+      - 27017:27017
+    volumes:
+      - ./code/server/mongodb:/app
+      - ./mongodb-db:/data/db
+    working_dir: /app
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: root
+      MONGO_INITDB_ROOT_PASSWORD: root
+    restart: always

@@ -14,7 +14,7 @@ class OriginMiddleware {
         const listOrigins: string[] = (process.env.ORIGINS as string).split(',');
 
         // verifier la présence de l'origine dans la liste
-        if(listOrigins.indexOf(origin) === -1 && host !== 'localhost' && host !== "127.0.0.1") {
+        if(listOrigins.indexOf(origin) === -1 && origin !== 'undefined') {
             return res.status(403).json({
                 status: 403,
                 message: "Forbidden origin",
