@@ -20,9 +20,10 @@ class VehiculeRouter {
 		// ajout d'un middleware de validation
 		// ajout d'un middleware pour les autorisation
 		this.router.post("/", 
-		new AuthorizationMiddleware().authorize(['admin']), 
-		new VehiculeValidatorMiddleware().filter, 
-		new VehiculeController().create);
+			new AuthorizationMiddleware().authorize(['admin']), 
+			new VehiculeValidatorMiddleware().filter, 
+			new VehiculeController().create
+		);
 
 		// route pour modifier un vehicule 
 		this.router.put("/:id", new VehiculeController().update);

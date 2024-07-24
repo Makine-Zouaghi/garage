@@ -19,7 +19,7 @@ class VehiculeValidatorMiddleware {
 				),
 			});
 		}
-        
+
 		// passer au middleware suivant
 		next();
 	};

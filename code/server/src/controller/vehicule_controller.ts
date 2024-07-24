@@ -42,7 +42,7 @@ class VehiculeController {
 				? res.json(results)
 				: res.status(400).json({
 						status: 400,
-						message: "Error",
+						message: "Error ",
 					});
 		}
 
@@ -58,6 +58,7 @@ class VehiculeController {
 
 		//req.body permet de récupérer les données dans la propriété body de la requete HTTP
 		const results = await this.vehiculeRepository.create(req.body);
+console.log(results);
 
 		//si une erreur est renvoyé
 		if (results instanceof Error) {
@@ -66,7 +67,7 @@ class VehiculeController {
 				? res.json(results)
 				: res.status(400).json({
 						status: 400,
-						message: "Error",
+						message: "Error controller",
 					});
 		}
 
@@ -117,8 +118,6 @@ class VehiculeController {
 			message: "Vehicule deleted",
 		});
 	};
-
-
 }
 
 export default VehiculeController;

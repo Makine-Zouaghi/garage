@@ -1,4 +1,4 @@
--- DROP DATABASE IF EXISTS garage;
+DROP DATABASE IF EXISTS garage;
 
 CREATE DATABASE garage;
 
@@ -9,7 +9,7 @@ CREATE TABLE garage.brand(
 
 CREATE TABLE garage.vehicule(
     id TINYINT UNSIGNED PRIMARY KEY AUTO_INCREMENT,
-    model VARCHAR(50) NOT NULL UNIQUE, 
+    model VARCHAR(50) NOT NULL, 
     price DECIMAL(7, 2) UNSIGNED NOT NULL,
     brand_id TINYINT UNSIGNED NOT NULL,
     FOREIGN KEY(brand_id) REFERENCES garage.brand(id)

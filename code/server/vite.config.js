@@ -8,7 +8,7 @@ export default defineConfig(({ command, mode }) => {
 		path: ".env.test",
 	});
 
-	console.log(process.env);
+	// console.log(process.env);
 
 	return {
 		// vite config
@@ -18,7 +18,7 @@ export default defineConfig(({ command, mode }) => {
 		test: {
 			coverage: {
 				reportsDirectory: "__tests__/__coverage__",
-				exclude: ["__tests__", "vite.config.js", "src/index.ts"],
+				exclude: ["__tests__", "vite.config.js", "src/index.ts","dist", "mongodb"],
 			},
 		},
 	};

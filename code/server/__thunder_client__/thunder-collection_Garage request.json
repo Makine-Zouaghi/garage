@@ -1,0 +1,158 @@
+{
+    "clientName": "Thunder Client",
+    "collectionName": "Garage request",
+    "collectionId": "4e0645b0-1309-4ff8-b516-3bd9ed745211",
+    "dateExported": "2024-07-24T07:26:25.380Z",
+    "version": "1.2",
+    "folders": [],
+    "requests": [
+        {
+            "_id": "c49fc2ba-472f-4260-85f3-b2e9d5f5353c",
+            "colId": "4e0645b0-1309-4ff8-b516-3bd9ed745211",
+            "containerId": "",
+            "name": "http://127.0.0.1:3000/contact",
+            "url": "http://127.0.0.1:3000/contact",
+            "method": "GET",
+            "sortNum": 10000,
+            "created": "2024-07-24T07:23:25.346Z",
+            "modified": "2024-07-24T07:23:25.346Z",
+            "headers": []
+        },
+        {
+            "_id": "109b028d-e11f-4e67-b821-cc532280d499",
+            "colId": "4e0645b0-1309-4ff8-b516-3bd9ed745211",
+            "containerId": "",
+            "name": "http://127.0.0.1:3000/vehicule",
+            "url": "http://127.0.0.1:3000/vehicule",
+            "method": "POST",
+            "sortNum": 20000,
+            "created": "2024-07-24T07:23:34.722Z",
+            "modified": "2024-07-24T07:23:34.722Z",
+            "headers": [
+                {
+                    "name": "Accept",
+                    "value": "*/*",
+                    "isDisabled": true
+                },
+                {
+                    "name": "User-Agent",
+                    "value": "Thunder Client (https://www.thunderclient.com)",
+                    "isDisabled": true
+                },
+                {
+                    "name": "Authorization",
+                    "value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoxLCJlbWFpbCI6ImFkbWluQGFkbWluLmZyIiwicGFzc3dvcmQiOiIkYXJnb24yaSR2PTE5JG09MTYsdD0yLHA9MSRUMEpwY21WUE0xVlBTRnBLVFVSWFJRJFhmTDdYaWt4a0tlMzlWZE96SE5STlEiLCJyb2xlc19pZCI6MSwicm9sZSI6eyJpZCI6MSwibmFtZSI6ImFkbWluIn19LCJpYXQiOjE3MjEyOTc1MDMsImV4cCI6MTcyMTI5NzUzM30.VTvRpe1pWc1kTksm22Yt1ZbnjKjFGc38a6T2P9iCXus"
+                }
+            ],
+            "body": {
+                "type": "json",
+                "raw": "{\n  \"model\": \"corlexur\",\n  \"price\": 2000,\n  \"brand_id\": 1,\n  \"options_id\": \"1,2\"\n}",
+                "form": []
+            }
+        },
+        {
+            "_id": "45dcf931-2942-48f4-b8da-7d46bbfb6c09",
+            "colId": "4e0645b0-1309-4ff8-b516-3bd9ed745211",
+            "containerId": "",
+            "name": "http://127.0.0.1:3000/auth",
+            "url": "http://127.0.0.1:3000/auth",
+            "method": "POST",
+            "sortNum": 30000,
+            "created": "2024-07-24T07:23:41.304Z",
+            "modified": "2024-07-24T07:23:41.304Z",
+            "headers": [
+                {
+                    "name": "Accept",
+                    "value": "*/*",
+                    "isDisabled": true
+                },
+                {
+                    "name": "User-Agent",
+                    "value": "Thunder Client (https://www.thunderclient.com)",
+                    "isDisabled": true
+                }
+            ],
+            "body": {
+                "type": "json",
+                "raw": "{\n  \"email\": \"admin@admin.fr\",\n  \"password\": \"admin\"\n}",
+                "form": []
+            }
+        },
+        {
+            "_id": "d8794eda-e9cf-45ce-bae3-f4cdace63753",
+            "colId": "4e0645b0-1309-4ff8-b516-3bd9ed745211",
+            "containerId": "",
+            "name": "http://127.0.0.1:3000/login",
+            "url": "http://127.0.0.1:3000/login",
+            "method": "POST",
+            "sortNum": 40000,
+            "created": "2024-07-24T07:23:49.176Z",
+            "modified": "2024-07-24T07:23:49.176Z",
+            "headers": [],
+            "body": {
+                "type": "json",
+                "raw": "{\n  \"email\": \"admin2@admin.fr\",\n  \"password\": \"admin\"\n}",
+                "form": []
+            }
+        },
+        {
+            "_id": "b6e7a7c7-3006-48ff-881c-93107b3d368c",
+            "colId": "4e0645b0-1309-4ff8-b516-3bd9ed745211",
+            "containerId": "",
+            "name": "https://127.0.0.1:3000/register",
+            "url": "http://127.0.0.1:3000/register",
+            "method": "POST",
+            "sortNum": 50000,
+            "created": "2024-07-24T07:23:53.435Z",
+            "modified": "2024-07-24T07:23:53.435Z",
+            "headers": [],
+            "body": {
+                "type": "json",
+                "raw": "{\n  \"email\": \"deal@deal.fr\",\n  \"password\": \"1234d\"\n}",
+                "form": []
+            }
+        },
+        {
+            "_id": "ed410fc0-2055-40df-9fbf-d1a0821ad2f8",
+            "colId": "4e0645b0-1309-4ff8-b516-3bd9ed745211",
+            "containerId": "",
+            "name": "https://127.0.0.1:3000/vehicule/",
+            "url": "http://127.0.0.1:3000/vehicule",
+            "method": "GET",
+            "sortNum": 60000,
+            "created": "2024-07-24T07:23:57.559Z",
+            "modified": "2024-07-24T07:23:57.559Z",
+            "headers": []
+        },
+        {
+            "_id": "228f4b9d-2e00-47c5-85d2-db618a5b28f5",
+            "colId": "4e0645b0-1309-4ff8-b516-3bd9ed745211",
+            "containerId": "",
+            "name": "http://127.0.0.1:3000/vehicule/1",
+            "url": "http://127.0.0.1:3000/vehicule/2",
+            "method": "DELETE",
+            "sortNum": 70000,
+            "created": "2024-07-24T07:24:03.204Z",
+            "modified": "2024-07-24T07:24:03.204Z",
+            "headers": []
+        },
+        {
+            "_id": "65201f60-db64-4cde-851b-9d90c60b9168",
+            "colId": "4e0645b0-1309-4ff8-b516-3bd9ed745211",
+            "containerId": "",
+            "name": "http://127.0.0.1:3000/vehicule/1",
+            "url": "http://127.0.0.1:3000/vehicule/1",
+            "method": "PUT",
+            "sortNum": 80000,
+            "created": "2024-07-24T07:24:09.188Z",
+            "modified": "2024-07-24T07:24:09.188Z",
+            "headers": [],
+            "body": {
+                "type": "json",
+                "raw": "{\n  \"model\": \"corolla 4.5\",\n  \"price\": 35000,\n  \"brand_id\": 2,\n  \"options_id\": \"2, 3\"\n}",
+                "form": []
+            }
+        }
+    ],
+    "ref": "0LDQgiuzVlye8WL4QuAcV-ZsfudDGQfvmuMmdrJojK7h9B3CWe5BmstIqR2_fzTk5794wNZEaSulIkvTk6Kq4Q"
+}
