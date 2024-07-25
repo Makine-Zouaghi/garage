@@ -34,3 +34,12 @@ jobs:
                     cd code/server
                     rm -rf dist
                     npm run compile
+
+            -
+                name: installer la basse de données dans le serveur MySQL
+                run: |
+                    sudo service mysql start
+                    cd code/server/mysql
+                    mysql -uroot -proot -e 'SOURCE garage.test.sql;'
+                    mysql -uroot -proot -e 'SHOW DATABASES;'
+                    mysql -uroot -proot -e 'USE garage_test; TABLE garage_test.brand;'
