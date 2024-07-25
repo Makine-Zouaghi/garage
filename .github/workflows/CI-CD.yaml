@@ -43,3 +43,9 @@ jobs:
                     mysql -uroot -proot -e 'SOURCE garage.test.sql;'
                     mysql -uroot -proot -e 'SHOW DATABASES;'
                     mysql -uroot -proot -e 'USE garage_test; TABLE garage_test.brand;'
+
+            -
+                name: Exécuter les tests 
+                run: |
+                    cd code/server
+                    npm run test:coverage
