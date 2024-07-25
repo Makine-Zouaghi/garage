@@ -8,14 +8,17 @@ on: workflow_dispatch
 jobs:
 
     # nom de la tâche
-    coucou:
+    CI:
 
         # type d'environnement
         runs-on: ubuntu-latest
 
         steps:
             - 
-                name: Hello
+                name: Récupérer le dépôt GitHub
+
+                # executer une commande prédèfinie : checkout
+                uses: actions/checkout@v4
 
                 # executer une commande personelle : run
-                run: echo "Hello"
+                # run: echo "Hello"
