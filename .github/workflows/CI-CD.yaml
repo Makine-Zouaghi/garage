@@ -1,0 +1,21 @@
+# nom du workflow 
+name: Garage CI/CD
+
+# déclenchement du workflow
+on: workflow_dispatch
+
+# tâches
+jobs:
+
+    # nom de la tâche
+    coucou:
+
+        # type d'environnement
+        runs-on: ubuntu-latest
+
+        steps:
+            - 
+                name: Hello
+
+                # executer une commande personelle : run
+                run: echo "Hello"
