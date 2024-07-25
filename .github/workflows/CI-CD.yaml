@@ -48,4 +48,5 @@ jobs:
                 name: Exécuter les tests 
                 run: |
                     cd code/server
+                    npm run test
                     npm run test:coverage
